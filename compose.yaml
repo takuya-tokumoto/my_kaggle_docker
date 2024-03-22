@@ -12,8 +12,8 @@ services:
     shm_size: '8gb'
     volumes:
       - ../:/kaggle
-      # - /home/ubuntu:/kaggle
       - ~/.aws/credentials:/root/.aws/credentials:ro
+      - ~/.aws/config:/root/.aws/config:ro
     environment:
       - AWS_S3_BUCKET=user-dataset
       - MOUNT_POINT=/kaggle/s3storage
