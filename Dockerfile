@@ -5,6 +5,17 @@ ENV lang="ja_jp.utf-8" language="ja_jp:ja" lc_all="ja_jp.utf-8"
 
 #ライブラリのインストール
 WORKDIR /kaggle
+
+# 必要なツールのインストール
+RUN apt-get update && \
+    apt-get install -y s3fs && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN apt-get install -y wget && \
+    wget https://s3.amazonaws.com/mountpoint-s3-release/latest/x86_64/mount-s3.deb && \
+    apt-get install -y ./mount-s3.deb && \
+    rm -rf /var/lib/apt/lists/* ./mount-s3.deb
+
 #各々のGPUに対応するpytorchをインストールhttps://pytorch.org/get-started/previous-versions/
 # RUN pip install torch==2.0.1+cu117 torchvision==0.15.2+cu117 torchaudio==2.0.2 --index-url https://download.pytorch.org/whl/cu117
 # 今回立ち上げた環境のcudaは12.1

@@ -1,6 +1,7 @@
 services:
   app:
     build: .
+    privileged: true
     deploy:
       resources:
         reservations:
@@ -10,8 +11,14 @@ services:
               capabilities: [gpu]
     shm_size: '8gb'
     volumes:
-      - ./:/kaggle
+      - ../:/kaggle
+      # - /home/ubuntu:/kaggle
+      - ~/.aws/credentials:/root/.aws/credentials:ro
+    environment:
+      - AWS_S3_BUCKET=user-dataset
+      - MOUNT_POINT=/kaggle/s3storage
     working_dir: /kaggle
     ports:
       - "8888:8888"
     tty: true
+ 
