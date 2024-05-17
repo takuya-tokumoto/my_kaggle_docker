@@ -6,7 +6,11 @@ worked on docker version 24.x.x higher
 how to build and run
 ```bash
 $ cd my_kaggle_docker
-$ docker compose up -d
+
+# cpuのみ環境の場合
+$ docker compose -f compose.cpu.yaml up 
+# GPUあり環境の場合
+$ docker compose -f compose.yaml up 
 ```
 
 # acess jupyter notebook
